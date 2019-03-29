@@ -1,19 +1,23 @@
 public class MyLinkedList{
-    private int length;
-    private Node start,end;
-    public MyLinkedList(){
+  private int length;
+  private Node start,end;
+
+  public MyLinkedList(){
         length = 0;
         start = null;
         end = null;
     }
-    public MyLinkedList(int newlength, Node newstart, Node newend){
-        length = newlength;
-        start = newstart;
-        end = newend;
+
+    public void clear(){
+      length = 0;
+      start = null;
+      end = null;
     }
+
     public int size(){
         return length;
     }
+
     public boolean add(Integer value){
         if (length == 0){
             start = new Node(value, null, null);
