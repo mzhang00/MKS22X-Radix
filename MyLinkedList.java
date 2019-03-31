@@ -18,7 +18,7 @@ public class MyLinkedList<E>{
     return length;
   }
 
-  public boolean addValue(E value){
+  private boolean addValue(E value){
     if (length == 0){
       start = new Node(value, null, null);
     }else if (length == 1){
@@ -53,8 +53,13 @@ public class MyLinkedList<E>{
     }
     return nth;
   }
+
+  public boolean add(E value){
+    addIndex(length, value);
+    return true;
+  }
   
-  public void add(int index, E value){
+  private void addIndex(int index, E value){
     if (index < 0 || index > length){
       throw new IndexOutOfBoundsException();
     }
@@ -73,7 +78,7 @@ public class MyLinkedList<E>{
     length++;
   }
 
-  public E remove(int index){
+  private E remove(int index){
     if (index < 0 || index > length){
       throw new IndexOutOfBoundsException();
     }
@@ -96,36 +101,12 @@ public class MyLinkedList<E>{
     return returnval;
   }
 
-  public boolean removeValue(E value){
-    Node temp = null;
-    Node current = start;
-    if (start.getData().equals(value)){
-      start.next().setPrev(null);
-      start = start.next();
-      length -= 1;
-      return true;
-    }
-    for (int i = 0; i < length - 1; i++){
-      if (current.getData().equals(value)){
-        temp = current;
-        temp.prev().setNext(temp.next());
-        temp.next().setPrev(temp.prev());
-        length -= 1;
-        return true;
-      }
-      current = current.next();
-    }
-    if (end.getData().equals(value)){
-      end.prev().setNext(null);
-      end = end.prev();
-      length -= 1;
-      return true;
-    }
-    return false;
+  public E removeFront(){
+    return remove(0);
   }
 
-  public void extend(MyLinkedList other){
-    if (size() == 0){
+  public void extend(MyLinkedList<E> other){
+    if (this.size() == 0){
       start = other.start;
       end = other.end;
       length = other.length;

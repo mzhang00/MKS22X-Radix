@@ -20,12 +20,6 @@ public class Node<E>{
     prev = newprev;
   }
   
-  public Node(Node copy){
-    data = copy.getData();
-    next = copy.next();
-    prev = copy.prev();
-  }
-  
   public Node next(){
     return next;
   }
