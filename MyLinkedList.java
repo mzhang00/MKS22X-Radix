@@ -83,17 +83,14 @@ public class MyLinkedList<E>{
       throw new IndexOutOfBoundsException();
     }
     Node temp = getNthNode(index);
-    E returnval;
+    E returnval = temp.getData();
     if (index == length - 1){
       end.prev().setNext(null);
-      returnval = end.getData();
       end = end.prev();
     }else if (index == 0){
       start.next().setPrev(null);
-      returnval = start.getData();
       start = start.next();
     }else{
-      returnval = temp.getData();
       temp.prev().setNext(temp.next());
       temp.next().setPrev(temp.prev());
     }
@@ -121,6 +118,59 @@ public class MyLinkedList<E>{
       other.start = null;
       other.end = null;
       other.length = 0;
+    }
+  }
+
+  class Node{
+    private E data;
+    private Node next, prev;
+    
+    public Node(){
+      data = null;
+      next = null;
+      prev = null;
+    }
+    
+    public Node(E newdata){
+      data = newdata;
+      next = null;
+      prev = null;
+    }
+    
+    public Node(E newdata, Node newnext, Node newprev){
+      data = newdata;
+      next = newnext;
+      prev = newprev;
+    }
+    
+    public Node next(){
+      return next;
+    }
+    
+    public Node prev(){
+      return prev;
+    }
+    
+    public void setNext(Node other){
+      next = other;
+    }
+    
+    public void setPrev(Node other){
+      prev = other;
+    }
+    
+    public E getData(){
+      return data;
+    }
+    
+    public E setData(E i){
+      E temp = data;
+      data = i;
+      return temp;
+    }
+    
+    public String toString(){
+      return data.toString();
     }
   }
 }
