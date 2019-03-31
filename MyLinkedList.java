@@ -1,4 +1,4 @@
-public class MyLinkedList{
+public class MyLinkedList<E>{
   private int length;
   private Node start,end;
 
@@ -18,7 +18,7 @@ public class MyLinkedList{
     return length;
   }
 
-  public boolean add(Integer value){
+  public boolean addValue(E value){
     if (length == 0){
       start = new Node(value, null, null);
     }else if (length == 1){
@@ -53,57 +53,13 @@ public class MyLinkedList{
     }
     return nth;
   }
-
-  public Integer get(int index){
-    if (index < 0 || index > length){
-      throw new IndexOutOfBoundsException();
-    }
-    return getNthNode(index).getData();
-  }
-
-  public Integer set(int index, Integer value){
-    if (index < 0 || index > length){
-      throw new IndexOutOfBoundsException();
-    }
-    return getNthNode(index).setData(value);
-  }
-
-  public boolean contains(Integer value){
-    Node current = start;
-    while (current != end){
-      if (current.getData().equals(value)){
-        return true;
-      }
-      current = current.next();
-    }
-    if (current.getData().equals(value)){
-      return true;
-    }
-    return false;
-  }
-
-  public int indexOf(Integer value){
-    Node current = start;
-    int counter = 0;
-    while (current != end){
-      if (current.getData().equals(value)){
-        return counter;
-      }
-      current = current.next();
-      counter++;
-    }
-    if (current.getData().equals(value)){
-      return counter;
-    }
-    return -1;
-  }
-
-  public void add(int index, Integer value){
+  
+  public void add(int index, E value){
     if (index < 0 || index > length){
       throw new IndexOutOfBoundsException();
     }
     if (index == length){
-      add(value);
+      addValue(value);
     }else if (index == 0){
       Node newnode = new Node(value, start, null);
       start.setPrev(newnode);
@@ -117,12 +73,12 @@ public class MyLinkedList{
     length++;
   }
 
-  public Integer remove(int index){
+  public E remove(int index){
     if (index < 0 || index > length){
       throw new IndexOutOfBoundsException();
     }
     Node temp = getNthNode(index);
-    Integer returnval;
+    E returnval;
     if (index == length - 1){
       end.prev().setNext(null);
       returnval = end.getData();
@@ -140,7 +96,7 @@ public class MyLinkedList{
     return returnval;
   }
 
-  public boolean remove(Integer value){
+  public boolean removeValue(E value){
     Node temp = null;
     Node current = start;
     if (start.getData().equals(value)){
