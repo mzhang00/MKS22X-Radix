@@ -14,7 +14,7 @@ public class MyLinkedList<E>{
     end = null;
   }
 
-  public int size(){
+  private int size(){
     return length;
   }
 
@@ -54,11 +54,16 @@ public class MyLinkedList<E>{
     return nth;
   }
 
-  public boolean add(E value){
+  public boolean addFront(E value){
+    addIndex(0, value);
+    return true;
+  }
+
+  public boolean addEnd(E value){
     addIndex(length, value);
     return true;
   }
-  
+
   private void addIndex(int index, E value){
     if (index < 0 || index > length){
       throw new IndexOutOfBoundsException();
@@ -124,51 +129,51 @@ public class MyLinkedList<E>{
   class Node{
     private E data;
     private Node next, prev;
-    
+
     public Node(){
       data = null;
       next = null;
       prev = null;
     }
-    
+
     public Node(E newdata){
       data = newdata;
       next = null;
       prev = null;
     }
-    
+
     public Node(E newdata, Node newnext, Node newprev){
       data = newdata;
       next = newnext;
       prev = newprev;
     }
-    
+
     public Node next(){
       return next;
     }
-    
+
     public Node prev(){
       return prev;
     }
-    
+
     public void setNext(Node other){
       next = other;
     }
-    
+
     public void setPrev(Node other){
       prev = other;
     }
-    
+
     public E getData(){
       return data;
     }
-    
+
     public E setData(E i){
       E temp = data;
       data = i;
       return temp;
     }
-    
+
     public String toString(){
       return data.toString();
     }
