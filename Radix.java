@@ -3,7 +3,9 @@ public class Radix{
     @SuppressWarnings("unchecked")
     MyLinkedList<Integer>[] list = new MyLinkedList[10];
     int numofdigits = maxDigits(data);
-    return;
+    while (numofdigits > 0){
+      
+    }
   }
 
   private static int maxDigits(int[] data){
@@ -19,5 +21,10 @@ public class Radix{
       }
     }
     return max;
+  }
+
+  public static void main(String[] args){
+    //int[] test = {0,1,123,-1231223, -123};
+    //System.out.println(maxDigits(test));
   }
 }
