@@ -8,7 +8,10 @@ public class Radix{
       list[i] = new MyLinkedList<Integer>();
     }
     int numofdigits = maxDigits(data);
-    while (numofdigits > 0){
+    while (numofdigits != 0){
+      for (int i = 0; i < data.length; i++){
+
+      }
       numofdigits--;
       //asd
     }
@@ -25,7 +28,7 @@ public class Radix{
       return;
     }
     for (int i = 0; i < data.length; i++){
-      int digit = Integer.parseInt(data[i]) % (int)Math.pow(10.0, currentdigit) / (int)Math.pow(10.0, currentdigit - 1);
+      Zint digit = Integer.parseInt(data[i]) % (int)Math.pow(10.0, currentdigit) / (int)Math.pow(10.0, currentdigit - 1);
       if (data[i].charAt(0) == '-'){
         buckets[digit].addFront(Integer.parseInt(data[i]));
       }
@@ -33,9 +36,12 @@ public class Radix{
   }
 */
 
+  private static int getDigit(int number, int digit){
+    return ((number % (int)Math.pow(10.0, digit)) / (int)Math.pow(10.0, digit - 1));
+  }
+
   private static boolean isNegative(int number){
-    String temp = "" + number;
-    if (temp.charAt(0) == '-'){
+    if (("" + number).charAt(0) == '-'){
       return true;
     }
     return false;
@@ -63,6 +69,7 @@ public class Radix{
       System.out.println(i);
     }*/
     //System.out.println(386 % 1000 / 100);
-    System.out.println(isNegative(-1));
+    //System.out.println(isNegative(-1));
+    System.out.println(getDigit(386, 4));
   }
 }
