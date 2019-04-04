@@ -8,6 +8,10 @@ public class Radix{
       list[i] = new MyLinkedList<Integer>();
     }
     int numofdigits = maxDigits(data);
+    while (numofdigits > 0){
+      numofdigits--;
+      //asd
+    }
     /*String[] newdata = new String[data.length];
     for (int i = 0; i < data.length; i++){
       newdata[i] = "" + data[i];
@@ -29,6 +33,14 @@ public class Radix{
   }
 */
 
+  private static boolean isNegative(int number){
+    String temp = "" + number;
+    if (temp.charAt(0) == '-'){
+      return true;
+    }
+    return false;
+  }
+
   private static int maxDigits(int[] data){
     int max = 0;
     for (int i = 0; i < data.length; i++){
@@ -46,10 +58,11 @@ public class Radix{
 
   public static void main(String[] args){
     int[] test = {0,1,123,-1231223, -123};
-    radixsort(test);
+    //radixsort(test);
     /*for (String i : ans){
       System.out.println(i);
     }*/
-    System.out.println(386 % 1000 / 100);
+    //System.out.println(386 % 1000 / 100);
+    System.out.println(isNegative(-1));
   }
 }
