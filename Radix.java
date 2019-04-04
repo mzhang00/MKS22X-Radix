@@ -8,7 +8,7 @@ public class Radix{
     }
 
     @SuppressWarnings("unchecked")
-    MyLinkedList<Integer>[] buckets = new MyLinkedList[10];
+    MyLinkedList<Integer>[] buckets = new MyLinkedList[19];
     
     for (int i = 0; i < buckets.length; i++){
       buckets[i] = new MyLinkedList<Integer>();
@@ -21,14 +21,14 @@ public class Radix{
       for (int i = 0; i < data.length; i++){
         int digit = getDigit(data[i], currentdigit);
         if (isNegative(digit)){
-          buckets[digit * -1].addFront(data[i]);
+          buckets[digit + 9].addFront(data[i]);
         }else{
-          buckets[digit].addEnd(data[i]);
+          buckets[digit + 9].addEnd(data[i]);
         }
         
       }
       int counter = 0;
-      for (int i = 0; i <= 9; i++){
+      for (int i = 0; i <= 18; i++){
         while(buckets[i].size() > 0){
           data[counter] = buckets[i].removeFront();
           counter++; 
@@ -65,7 +65,7 @@ public class Radix{
   }
 
   public static void main(String[] args){
-    int[] test = {0,-2,6,1,5,3};
+    int[] test = {0,-2,6,1,15,3, -123, 234, 23, -22, -12, -2, 13, 19};
     radixsort(test);
     for (int i : test){
       System.out.print(i + " ");
