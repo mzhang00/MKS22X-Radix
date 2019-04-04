@@ -2,24 +2,74 @@ import java.util.*;
 
 public class Radix{
   public static void radixsort(int[] data){
-    @SuppressWarnings("unchecked")
-    MyLinkedList<Integer>[] list = new MyLinkedList[10];
-    for (int i = 0; i < list.length; i++){
-      list[i] = new MyLinkedList<Integer>();
-    }
-    int numofdigits = maxDigits(data);
-    while (numofdigits != 0){
-      for (int i = 0; i < data.length; i++){
 
-      }
-      numofdigits--;
-      //asd
+    if (data.length <= 1){
+      return;
     }
-    /*String[] newdata = new String[data.length];
-    for (int i = 0; i < data.length; i++){
-      newdata[i] = "" + data[i];
-    }*/
-    //radixH(newdata, list, numofdigits + 1, 1);
+
+    @SuppressWarnings("unchecked")
+    MyLinkedList<Integer>[] buckets = new MyLinkedList[10];
+    
+    for (int i = 0; i < buckets.length; i++){
+      buckets[i] = new MyLinkedList<Integer>();
+    }
+    
+    int numofdigits = maxDigits(data);
+    int currentdigit = 1;
+    
+    MyLinkedList<Integer> helperlist = new MyLinkedList<>();
+    
+    /*for (int i = 0; i < data.length; i++){
+      if (isNegative(data[i])){
+        buckets[(getDigit(data[i], currentdigit)) * -1].addFront(data[i]);
+      }else{
+        buckets[getDigit(data[i], currentdigit)].addEnd(data[i]);
+      }
+    }
+
+    if (currentdigit != numofdigits){ 
+      for (int i = 0; i < data.length; i++){
+        helperlist.extend(buckets[i]);
+        buckets[i].clear();
+      }
+    }else{
+      for (int i = 0; i < data.length; i++){
+        helperlist.extend(buckets[i]);
+        buckets[i].clear();
+      }
+      //sortEnd();
+      //return;
+    }
+    currentdigit--;*/
+
+    while (currentdigit <= numofdigits){
+      while (helperlist.size() > 0){
+        int temp = helperlist.removeFront();
+        if (isNegative(temp)){
+          buckets[getDigit(temp, currentdigit)].addFront(temp);
+        }else{
+          buckets[getDigit(temp, currentdigit)].addEnd(temp);
+        }
+      }
+      if (currentdigit != numofdigits){ 
+        for (int i = 0; i < data.length; i++){
+          helperlist.extend(buckets[i]);
+          buckets[i].clear();
+        }
+      }else{
+        for (int i = 0; i < data.length; i++){
+          helperlist.extend(buckets[i]);
+          buckets[i].clear();
+        }
+        //sortEnd();
+        //return;
+      }
+      currentdigit--;
+    }
+  }
+
+  private static void sortEnd(){
+    return;
   }
 
 /*
@@ -63,13 +113,13 @@ public class Radix{
   }
 
   public static void main(String[] args){
-    int[] test = {0,1,123,-1231223, -123};
-    //radixsort(test);
-    /*for (String i : ans){
+    int[] test = {0,1,123,1231223, 1123};
+    radixsort(test);
+    for (int i : test){
       System.out.println(i);
-    }*/
+    }
     //System.out.println(386 % 1000 / 100);
     //System.out.println(isNegative(-1));
-    System.out.println(getDigit(386, 4));
+    //System.out.println(getDigit(-386, 2));
   }
 }

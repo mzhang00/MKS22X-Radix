@@ -14,21 +14,18 @@ public class MyLinkedList<E>{
     end = null;
   }
 
-  private int size(){
+  public int size(){
     return length;
   }
 
   private boolean addValue(E value){
+    Node temp = new Node(value, null, null);
     if (length == 0){
-      start = new Node(value, null, null);
-    }else if (length == 1){
-      end = new Node(value, null, start);
-      start = new Node(start.getData(), end, null);
+      start = temp;
     }else{
-      Node newnode = new Node(value, null, end);
-      end.setNext(newnode);
-      end = newnode;
+      end.setNext(temp);
     }
+    end = temp;
     length++;
     return true;
   }
