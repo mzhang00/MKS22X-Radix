@@ -17,74 +17,26 @@ public class Radix{
     int numofdigits = maxDigits(data);
     int currentdigit = 1;
     
-    MyLinkedList<Integer> helperlist = new MyLinkedList<>();
-    
-    /*for (int i = 0; i < data.length; i++){
-      if (isNegative(data[i])){
-        buckets[(getDigit(data[i], currentdigit)) * -1].addFront(data[i]);
-      }else{
-        buckets[getDigit(data[i], currentdigit)].addEnd(data[i]);
-      }
-    }
-
-    if (currentdigit != numofdigits){ 
-      for (int i = 0; i < data.length; i++){
-        helperlist.extend(buckets[i]);
-        buckets[i].clear();
-      }
-    }else{
-      for (int i = 0; i < data.length; i++){
-        helperlist.extend(buckets[i]);
-        buckets[i].clear();
-      }
-      //sortEnd();
-      //return;
-    }
-    currentdigit--;*/
-
     while (currentdigit <= numofdigits){
-      while (helperlist.size() > 0){
-        int temp = helperlist.removeFront();
-        if (isNegative(temp)){
-          buckets[getDigit(temp, currentdigit)].addFront(temp);
+      for (int i = 0; i < data.length; i++){
+        int digit = getDigit(data[i], currentdigit);
+        if (isNegative(digit)){
+          buckets[digit * -1].addFront(data[i]);
         }else{
-          buckets[getDigit(temp, currentdigit)].addEnd(temp);
+          buckets[digit].addEnd(data[i]);
+        }
+        
+      }
+      int counter = 0;
+      for (int i = 0; i <= 9; i++){
+        while(buckets[i].size() > 0){
+          data[counter] = buckets[i].removeFront();
+          counter++; 
         }
       }
-      if (currentdigit != numofdigits){ 
-        for (int i = 0; i < data.length; i++){
-          helperlist.extend(buckets[i]);
-          buckets[i].clear();
-        }
-      }else{
-        for (int i = 0; i < data.length; i++){
-          helperlist.extend(buckets[i]);
-          buckets[i].clear();
-        }
-        //sortEnd();
-        //return;
-      }
-      currentdigit--;
+      currentdigit++;
     }
   }
-
-  private static void sortEnd(){
-    return;
-  }
-
-/*
-  private static void radixH(String[] data, MyLinkedList<Integer>[] buckets, int maxdigits, int currentdigit){
-    if (currentdigit >= maxdigits){
-      return;
-    }
-    for (int i = 0; i < data.length; i++){
-      Zint digit = Integer.parseInt(data[i]) % (int)Math.pow(10.0, currentdigit) / (int)Math.pow(10.0, currentdigit - 1);
-      if (data[i].charAt(0) == '-'){
-        buckets[digit].addFront(Integer.parseInt(data[i]));
-      }
-    }
-  }
-*/
 
   private static int getDigit(int number, int digit){
     return ((number % (int)Math.pow(10.0, digit)) / (int)Math.pow(10.0, digit - 1));
@@ -113,11 +65,12 @@ public class Radix{
   }
 
   public static void main(String[] args){
-    int[] test = {0,1,123,1231223, 1123};
+    int[] test = {0,-2,6,1,5,3};
     radixsort(test);
     for (int i : test){
-      System.out.println(i);
+      System.out.print(i + " ");
     }
+    System.out.println();
     //System.out.println(386 % 1000 / 100);
     //System.out.println(isNegative(-1));
     //System.out.println(getDigit(-386, 2));

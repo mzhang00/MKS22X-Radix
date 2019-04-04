@@ -52,12 +52,28 @@ public class MyLinkedList<E>{
   }
 
   public boolean addFront(E value){
-    addIndex(0, value);
+    if (length == 0){
+      start = new Node(value, start, null);
+      end = start;
+    }else{
+      Node temp = new Node(value, start, null);
+      start.setPrev(temp);
+      start = temp;
+    }
+    length++;
     return true;
   }
 
   public boolean addEnd(E value){
-    addIndex(length, value);
+    if (length == 0){
+      end = new Node(value, null, end);
+      start = end;
+    }else{
+      Node temp = new Node(value, null, end);
+      end.setNext(temp);
+      end = temp;
+    }
+    length++;
     return true;
   }
 
@@ -86,12 +102,18 @@ public class MyLinkedList<E>{
     }
     Node temp = getNthNode(index);
     E returnval = temp.getData();
+    if (index == 0){
+      start = temp.next();
+      start.setPrev(null);
+      length--;
+      return returnval;
+    }
     if (index == length - 1){
-      end.prev().setNext(null);
-      end = end.prev();
+      end = getNthNode(index - 1);
+      end.setNext(null);
     }else if (index == 0){
-      start.next().setPrev(null);
-      start = start.next();
+      start = temp.next();
+      start.setPrev(null);
     }else{
       temp.prev().setNext(temp.next());
       temp.next().setPrev(temp.prev());
@@ -101,7 +123,15 @@ public class MyLinkedList<E>{
   }
 
   public E removeFront(){
-    return remove(0);
+    E returnval = start.getData();
+    if (length == 1){
+      clear();
+    }else{
+      start.next().setPrev(null);
+      start = start.next();
+      length--; 
+    }
+    return returnval;
   }
 
   public void extend(MyLinkedList<E> other){
