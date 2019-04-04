@@ -59,18 +59,6 @@ public class Radix{
     return max;
   }
 
-  /*public static void main(String[] args){
-    int[] test = {0,-2,6,1,15,3, -123, 234, 23, -22, -12, -2, 13, 19, -1, -1, 13};
-    radixsort(test);
-    for (int i : test){
-      System.out.print(i + " ");
-    }
-    System.out.println();
-    //System.out.println(386 % 1000 / 100);
-    //System.out.println(isNegative(-1));
-    //System.out.println(getDigit(-386, 2));
-  }*/
-
   public static void main(String[]args){
     System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
     int[]MAX_LIST = {1000000000,500,10};

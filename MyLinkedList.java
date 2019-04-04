@@ -18,18 +18,6 @@ public class MyLinkedList<E>{
     return length;
   }
 
-  private boolean addValue(E value){
-    Node temp = new Node(value, null, null);
-    if (length == 0){
-      start = temp;
-    }else{
-      end.setNext(temp);
-    }
-    end = temp;
-    length++;
-    return true;
-  }
-
   public String toString(){
     if (length == 0){
       return "[]";
@@ -41,14 +29,6 @@ public class MyLinkedList<E>{
       current = current.next();
     }
     return returnval.substring(0, returnval.length() - 2) + "]";
-  }
-
-  private Node getNthNode(int n){
-    Node nth = start;
-    for (int i = 0; i < n; i++){
-      nth = nth.next();
-    }
-    return nth;
   }
 
   public boolean addFront(E value){
@@ -75,51 +55,6 @@ public class MyLinkedList<E>{
     }
     length++;
     return true;
-  }
-
-  private void addIndex(int index, E value){
-    if (index < 0 || index > length){
-      throw new IndexOutOfBoundsException();
-    }
-    if (index == length){
-      addValue(value);
-    }else if (index == 0){
-      Node newnode = new Node(value, start, null);
-      start.setPrev(newnode);
-      start = newnode;
-    }else{
-      Node temp = getNthNode(index);
-      Node insert = new Node(value, temp, temp.prev());
-      temp.prev().setNext(insert);
-      temp.setPrev(insert);
-    }
-    length++;
-  }
-
-  private E remove(int index){
-    if (index < 0 || index > length){
-      throw new IndexOutOfBoundsException();
-    }
-    Node temp = getNthNode(index);
-    E returnval = temp.getData();
-    if (index == 0){
-      start = temp.next();
-      start.setPrev(null);
-      length--;
-      return returnval;
-    }
-    if (index == length - 1){
-      end = getNthNode(index - 1);
-      end.setNext(null);
-    }else if (index == 0){
-      start = temp.next();
-      start.setPrev(null);
-    }else{
-      temp.prev().setNext(temp.next());
-      temp.next().setPrev(temp.prev());
-    }
-    length -= 1;
-    return returnval;
   }
 
   public E removeFront(){
